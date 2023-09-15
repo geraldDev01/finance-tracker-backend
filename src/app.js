@@ -2,8 +2,10 @@ import express from "express";
 import morgan from "morgan";
 import cors from "cors";
 import dotenv from "dotenv";
+import { notFound } from "./middlewares/notFound";
 import pkg from "../package.json";
-// import userRoutes from "./routes/user.routes";
+import authRoutes from "./routes/auth.routes";
+import userRoutes from "./routes/user.routes";
 
 const app = express();
 dotenv.config();
@@ -32,6 +34,9 @@ app.use(morgan("dev"));
 app.use(cors());
 
 //routes
-// app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
+app.use("/api/users", userRoutes);
+
+app.use(notFound);
 
 export default app;
