@@ -1,0 +1,32 @@
+{
+  "name": "finance-tracker-backend",
+  "version": "1.0.0",
+  "description": "This is an API for the finance tracker app",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src --out-dir build",
+    "dev": "nodemon src/index.js --exec babel-node",
+    "start": "node build/index.js"
+  },
+  "keywords": [],
+  "author": "Gerald Solano",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.6.1",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1",
+    "sequelize": "^6.33.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.22.15",
+    "@babel/core": "^7.22.19",
+    "@babel/node": "^7.22.19",
+    "@babel/preset-env": "^7.22.15",
+    "nodemon": "^3.0.1"
+  }
+}
