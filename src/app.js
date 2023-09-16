@@ -8,6 +8,8 @@ import pkg from "../package.json";
 import authRoutes from "./routes/auth.routes";
 import userRoutes from "./routes/user.routes";
 import categoryRoutes from "./routes/category.routes";
+import typeRoutes from "./routes/type.routes";
+import transactionRoutes from "./routes/transaction.routes";
 
 const app = express();
 dotenv.config();
@@ -28,7 +30,6 @@ app.get("/", (req, res) => {
   res.json(packageInfo);
 });
 
-//body parser
 app.use(express.json());
 
 //middleware
@@ -39,6 +40,8 @@ app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 app.use("/api/categories", categoryRoutes);
+app.use("/api/types", typeRoutes);
+app.use("/api/transactions", transactionRoutes);
 
 app.use(notFound);
 
