@@ -17,6 +17,9 @@ const Transactions = sequelize.define("Transactions", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
+  description: {
+    type: DataTypes.STRING,
+  },
   amount: {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
