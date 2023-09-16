@@ -3,6 +3,6 @@ import { getCategories } from "../controllers/category.controller";
 import { verifyToken } from "../middlewares/auth";
 const router = Router();
 
-router.get("/", verifyToken, getCategories);
+router.get("/", getCategories);
 
 export default router;

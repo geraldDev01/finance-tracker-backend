@@ -21,10 +21,6 @@ const Transactions = sequelize.define("Transactions", {
     type: DataTypes.DECIMAL(10, 2),
     allowNull: false,
   },
-  transactionDate: {
-    type: DataTypes.DATE,
-    allowNull: false,
-  },
 });
 
 Transactions.belongsTo(User, {
@@ -41,6 +37,5 @@ Transactions.belongsTo(Category, {
   foreignKey: "category",
   as: "transactionCategory",
 });
-
 
 export default Transactions;

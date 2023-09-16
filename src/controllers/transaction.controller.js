@@ -1,20 +1,29 @@
+import Category from "../models/category";
 import Transactions from "../models/transaction";
+import Types from "../models/type";
+import User from "../models/User";
 
 export const createTransaction = async (req, res) => {
   try {
     const transaction = await Transactions.create(req.body);
     return res.status(201).json(transaction);
   } catch (error) {
-    return res.status(500).json({ error: "Error creating transaction" });
+    return res.status(500).json({ error: error.message });
   }
 };
 
 export const getAllTransactions = async (req, res) => {
   try {
-    const transactions = await Transactions.findAll();
+    const transactions = await Transactions.findAll({
+      include: [
+        { model: User, as: "transactionUser" },
+        { model: Types, as: "transactionType" },
+        { model: Category, as: "transactionCategory" },
+      ],
+    });
     return res.status(200).json(transactions);
   } catch (error) {
-    return res.status(500).json({ error: "Error retrieving transactions" });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -30,7 +39,7 @@ export const updateTransaction = async (req, res) => {
     }
     return res.status(404).json({ error: "Transaction not found" });
   } catch (error) {
-    return res.status(500).json({ error: "Error updating transaction" });
+    return res.status(500).json({ error: error.message });
   }
 };
 
@@ -41,10 +50,10 @@ export const deleteTransaction = async (req, res) => {
       where: { id },
     });
     if (deleted) {
-      return res.status(204).send(); 
+      return res.status(204).send();
     }
     return res.status(404).json({ error: "Transaction not found" });
   } catch (error) {
-    return res.status(500).json({ error: "Error deleting transaction" });
+    return res.status(500).json({ error: error.message });
   }
 };

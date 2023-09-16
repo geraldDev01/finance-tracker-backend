@@ -9,8 +9,8 @@ import { verifyToken } from "../middlewares/auth";
 const router = Router();
 
 router.get("/", verifyToken, getAllTransactions);
-router.post("/add", verifyToken, createTransaction);
-router.patch("/update", verifyToken, updateTransaction);
-router.delete("/delete", verifyToken, deleteTransaction);
+router.post("/", verifyToken, createTransaction);
+router.patch("/:id", verifyToken, updateTransaction);
+router.delete("/:id", verifyToken, deleteTransaction);
 
 export default router;
