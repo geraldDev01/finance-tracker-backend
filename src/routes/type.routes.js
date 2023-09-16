@@ -1,8 +1,8 @@
 import { Router } from "express";
-import { getCategories } from "../controllers/category.controller";
+import { getTypes } from "../controllers/type.controller";
 import { verifyToken } from "../middlewares/auth";
 const router = Router();
 
-router.get("/", getCategories);
+router.get("/", verifyToken, getTypes);
 
 export default router;

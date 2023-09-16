@@ -29,7 +29,7 @@ export const register = async (req, res) => {
 
     const savedUser = await newUser.save();
 
-    const token = jwt.sign({ id: savedUser._id }, config.SECRET, {
+    const token = jwt.sign({ id: savedUser.id }, config.SECRET, {
       expiresIn: 86400, //seg 24 hrs
     });
 
@@ -56,7 +56,7 @@ export const login = async (req, res) => {
       .json({ token: null, message: "ERROR invalid password" });
 
   const token = jwt.sign(
-    { id: userFound._id, fullName: userFound.fullName },
+    { id: userFound.id, fullName: userFound.fullName },
     config.SECRET,
     {
       expiresIn: 86400,
