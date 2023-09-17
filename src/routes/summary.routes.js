@@ -3,6 +3,6 @@ import { getSummary } from "../controllers/summary.controller";
 import { verifyToken } from "../middlewares/auth";
 const router = Router();
 
-router.get("/", getSummary);
+router.get("/", verifyToken, getSummary);
 
 export default router;

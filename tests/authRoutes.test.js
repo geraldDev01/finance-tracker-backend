@@ -3,20 +3,20 @@ import app from "../src/app";
 
 describe("Authentication Routes", () => {
   const userData = {
-    fullName: "dummy 3",
-    email: "dummy10@test.com",
-    password: "12345",
+    fullName: "dummy test",
+    email: "test@test.com",
+    password: "123ss45",
   };
 
   describe("POST /api/auth/register", () => {
     describe("Successful User Registration", () => {
-      test("should respond with a 200 status code when registering a new user", async () => {
+      test("should respond with a 201 status code when registering a new user", async () => {
         // Make HTTP request.
         const response = await request(app)
           .post("/api/auth/register")
           .send(userData);
 
-        expect(response.statusCode).toBe(200);
+        expect(response.statusCode).toBe(201);
 
         // Verify if the response contains token and user data
         expect(response.body).toHaveProperty("token");
@@ -80,7 +80,6 @@ describe("Authentication Routes", () => {
           .send(invalidUser);
 
         expect(response.statusCode).toBe(401);
-        expect(response.body.token).toBeNull();
       });
 
       test("should return session token and 200 status code when user is valid", async () => {

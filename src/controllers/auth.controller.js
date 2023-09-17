@@ -42,9 +42,13 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   const { email, password } = req.body;
   const userFound = await User.findOne({ where: { email } });
+
+  if (!userFound)
+    return res.status(401).json({ message: "ERROR invalid credentials" });
+
   const matchPassword = await comparePassword(password, userFound.password);
 
-  if (!userFound || !matchPassword)
+  if (!matchPassword)
     return res.status(401).json({ message: "ERROR invalid credentials" });
 
   const token = jwt.sign(

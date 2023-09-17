@@ -4,12 +4,12 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     const defaultTypes = [
       {
-        typeName: "Income",
+        name: "Income",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
       {
-        typeName: "Expense",
+        name: "Expense",
         createdAt: new Date(),
         updatedAt: new Date(),
       },
