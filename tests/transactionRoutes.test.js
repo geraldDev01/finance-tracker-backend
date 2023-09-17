@@ -1,7 +1,7 @@
 import request from "supertest";
 import app from "../src/app";
-import User  from "../src/models/User";
-import Transactions  from "../src/models/transaction";
+import User from "../src/models/User";
+import Transactions from "../src/models/transaction";
 
 // Save session token
 let authToken;
@@ -26,20 +26,24 @@ beforeAll(async () => {
 });
 
 describe("Transaction Routes", () => {
-
   // deletete all transactions and users created after all the test end.
   afterAll(async () => {
     if (user) {
       await Transactions.destroy({ where: { user: user.id } });
-      await User.destroy({ where: { id: user.id } }); 
+      await User.destroy({ where: { id: user.id } });
     }
   });
 
   describe("GET /api/transactions", () => {
     test("should retrieve 200 status code and all transactions when authenticated", async () => {
+      const page = 1;
+      const limit = 10;
+
       const response = await request(app)
-        .get("/api/transactions")
-        .set("x-access-token", authToken);
+        .get(`/api/transactions`)
+        .set("x-access-token", authToken)
+        .set("page", page)
+        .set("limit", limit);
 
       expect(response.statusCode).toBe(200);
       expect(Array.isArray(response.body)).toBe(true);
@@ -76,10 +80,9 @@ describe("Transaction Routes", () => {
         .set("x-access-token", authToken)
         .send(newTransaction);
 
-
       expect(response.statusCode).toBe(201);
 
-      transactionId = response.body.id
+      transactionId = response.body.id;
     });
   });
 

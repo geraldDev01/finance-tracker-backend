@@ -3,13 +3,21 @@ import Types from "../models/type";
 
 export const getSummary = async (req, res) => {
   try {
+    // Fetch the transactionType IDs by their names
+    const incomeType = await Types.findOne({ where: { name: "Income" } });
+    const expenseType = await Types.findOne({ where: { name: "Expense" } });
+
+    if (!incomeType || !expenseType) {
+      return res.status(404).json({ error: "Transaction types not found" });
+    }
+
     const totalIncome = await Transactions.sum("amount", {
-      where: { "$transactionType.id$": 1 },
+      where: { "$transactionType.id$": incomeType.id },
       include: [{ model: Types, as: "transactionType" }],
     });
 
     const totalExpense = await Transactions.sum("amount", {
-      where: { "$transactionType.id$": 2 },
+      where: { "$transactionType.id$": expenseType.id },
       include: [{ model: Types, as: "transactionType" }],
     });
 

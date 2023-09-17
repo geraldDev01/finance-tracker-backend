@@ -3,17 +3,7 @@ import jwt from "jsonwebtoken";
 import config from "../config";
 import bcrypt from "bcryptjs";
 import { serialize } from "cookie";
-
-//move to utils.js
-const encryptPassword = async (password) => {
-  const salt = await bcrypt.genSalt(10);
-  const passHash = await bcrypt.hash(password, salt);
-  return passHash.toString();
-};
-
-const comparePassword = async (password, receivedPassword) => {
-  return await bcrypt.compare(password, receivedPassword);
-};
+import { encryptPassword } from "../utils";
 
 export const register = async (req, res) => {
   try {
@@ -46,7 +36,7 @@ export const login = async (req, res) => {
   if (!userFound)
     return res.status(401).json({ message: "ERROR invalid credentials" });
 
-  const matchPassword = await comparePassword(password, userFound.password);
+  const matchPassword = await bcrypt.compare(password, userFound.password);
 
   if (!matchPassword)
     return res.status(401).json({ message: "ERROR invalid credentials" });

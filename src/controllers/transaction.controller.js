@@ -14,13 +14,20 @@ export const createTransaction = async (req, res) => {
 
 export const getAllTransactions = async (req, res) => {
   try {
+    const page = req.params.page || 1;
+    const limit = req.params.limit || 10;
+    const offset = (page - 1) * limit;
+
     const transactions = await Transactions.findAll({
       include: [
         { model: User, as: "transactionUser" },
-        { model: Types, as: "transactionType" },
-        { model: Category, as: "transactionCategory" },
+        { model: Types, as: "transactionType", attributes: ["name"] },
+        { model: Category, as: "transactionCategory", attributes: ["name"] },
       ],
+      limit,
+      offset,
     });
+
     return res.status(200).json(transactions);
   } catch (error) {
     return res.status(500).json({ error: error.message });
