@@ -1,5 +1,7 @@
 import request from "supertest";
 import app from "../src/app";
+import User  from "../src/models/User";
+import Transactions  from "../src/models/transaction";
 
 // Save session token
 let authToken;
@@ -24,6 +26,15 @@ beforeAll(async () => {
 });
 
 describe("Transaction Routes", () => {
+
+  // deletete all transactions and users created after all the test end.
+  afterAll(async () => {
+    if (user) {
+      await Transactions.destroy({ where: { user: user.id } });
+      await User.destroy({ where: { id: user.id } }); 
+    }
+  });
+
   describe("GET /api/transactions", () => {
     test("should retrieve 200 status code and all transactions when authenticated", async () => {
       const response = await request(app)

@@ -1,5 +1,6 @@
 import request from "supertest";
 import app from "../src/app";
+import User  from "../src/models/User"; 
 
 describe("Authentication Routes", () => {
   const userData = {
@@ -7,6 +8,13 @@ describe("Authentication Routes", () => {
     email: "test@test.com",
     password: "123ss45",
   };
+
+  // Delete user created after all the test end.
+  afterAll(async () => {
+    if (userData) {
+      await User.destroy({ where: { email: userData.email } }); 
+    }
+  });
 
   describe("POST /api/auth/register", () => {
     describe("Successful User Registration", () => {

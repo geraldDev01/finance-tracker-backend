@@ -8,7 +8,7 @@
     "dev": "nodemon src/index.js --exec babel-node",
     "start": "node build/index.js",
     "test": "jest --forceExit --detectOpenHandles",
-    "migration_seed": "sequelize-cli db:seed:all --url 'mysql://root:password@localhost/tracker_database'"
+    "migration_seed": "sequelize db:seed:all --url \"$DATABASE_URL\""
   },
   "keywords": [],
   "author": "Gerald Solano",
