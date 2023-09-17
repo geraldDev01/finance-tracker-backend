@@ -33,7 +33,7 @@ export const register = async (req, res) => {
       expiresIn: 86400, //seg 24 hrs
     });
 
-    res.status(200).json({ token, user: savedUser });
+    res.status(201).json({ token, user: savedUser });
   } catch (error) {
     res.status(400).json(error.message);
   }
@@ -42,18 +42,10 @@ export const register = async (req, res) => {
 export const login = async (req, res) => {
   const { email, password } = req.body;
   const userFound = await User.findOne({ where: { email } });
-
-  if (!userFound)
-    return res
-      .status(400)
-      .json({ token: null, message: "ERROR User not found" });
-
   const matchPassword = await comparePassword(password, userFound.password);
 
-  if (!matchPassword)
-    return res
-      .status(401)
-      .json({ token: null, message: "ERROR invalid password" });
+  if (!userFound || !matchPassword)
+    return res.status(401).json({ message: "ERROR invalid credentials" });
 
   const token = jwt.sign(
     { id: userFound.id, fullName: userFound.fullName },
@@ -73,5 +65,5 @@ export const login = async (req, res) => {
   console.log("serialized", serialized);
 
   res.setHeader("Set-Cookie", serialized);
-  res.json({ token, user: userFound });
+  res.status(200).json({ token, user: userFound });
 };
