@@ -9,7 +9,8 @@ const options = {
       description: "Documentation for API",
     },
   },
-  apis: ["./routes/*.js"],
+  basePath: "/",
+  apis: ["src/routes/*.routes.js"]
 };
 
 const swaggerSpec = swaggerJsdoc(options);

@@ -3,6 +3,7 @@ import { register, login } from "../controllers/auth.controller.js";
 import { checkDuplicateUser } from "../middlewares/auth";
 
 const router = Router();
+
 /**
  * @swagger
  * /api/auth/register:
@@ -78,8 +79,46 @@ const router = Router();
  *                 example:
  *                   message: Registration failed. Email already in use.
  */
-
 router.post("/register", checkDuplicateUser, register);
+
+/**
+ * @swagger
+ * /login:
+ *   post:
+ *     description: User login
+ *     tags:
+ *       - Authentication
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *               password:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Successful login
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                     fullName:
+ *                       type: string
+ *       401:
+ *         description: Unauthorized - Invalid credentials
+ */
 router.post("/login", login);
 
 export default router;
