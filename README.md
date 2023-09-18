@@ -6,16 +6,23 @@ This is the backend API for the Finance Tracker app, which allows users to manag
 
 ## 🚀 Quick Start
 
-.
+    .
+    1.  _Clone and Install packages._
 
-1.  _Clone and Install packages._
+        Use _git clone_ to download this repo into your machine, navigate to the project folder and use _npm_ to install dependencies.
 
-    Use _git clone_ to download this repo into your machine, navigate to the project folder and use _npm_ to install dependencies.
+    2.  _RUN MIGRATIONS TO CREATE A SEED DATABASE_
 
-2.  _Start editing!_
+        npm run migration_seed
 
-    Use _npm run dev_ to start the project in development mode, and _npm run build_ to generate a production build
-    Your API is now running at `http://localhost:4000`!
+    2.  _CREATE AN .ENV FILE IN THE MAIN DIRECTORY CONTENT WITH YOUR LOCAL VARIABLES!_
+
+        APP_PORT
+        APP_DB_PORT
+        DB_HOST
+        DB_USER
+        DB_PASS
+        DB_NAME
 
 ## 🧐 What's inside?
 
