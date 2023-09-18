@@ -11,6 +11,7 @@ import categoryRoutes from "./routes/category.routes";
 import typeRoutes from "./routes/type.routes";
 import transactionRoutes from "./routes/transaction.routes";
 import summaryRoutes from "./routes/summary.routes";
+import budgetRoutes from "./routes/budget.routes";
 
 const app = express();
 dotenv.config();
@@ -44,7 +45,7 @@ app.use("/api/categories", categoryRoutes);
 app.use("/api/types", typeRoutes);
 app.use("/api/transactions", transactionRoutes);
 app.use("/api/summaries", summaryRoutes);
-
+app.use("/api/budgets", budgetRoutes);
 
 app.use(notFound);
 
