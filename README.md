@@ -6,23 +6,24 @@ This is the backend API for the Finance Tracker app, which allows users to manag
 
 ## 🚀 Quick Start
 
-    .
-    1.  _Clone and Install packages._
+1.  Clone and Install packages.
+    Use _git clone_ to download this repo into your machine, navigate to the project folder and use _npm_ to install dependencies.
 
-        Use _git clone_ to download this repo into your machine, navigate to the project folder and use _npm_ to install dependencies.
+    npm install
 
-    2.  _RUN MIGRATIONS TO CREATE A SEED DATABASE_
+2.  RUN MIGRATIONS TO CREATE A SEED DATABASE
 
-        npm run migration_seed
+    sequelize init
+    npm run migration_seed
 
-    2.  _CREATE AN .ENV FILE IN THE MAIN DIRECTORY CONTENT WITH YOUR LOCAL VARIABLES!_
+3.  CREATE AN .ENV FILE IN THE MAIN DIRECTORY CONTENT WITH YOUR LOCAL VARIABLES like:
 
-        APP_PORT
-        APP_DB_PORT
-        DB_HOST
-        DB_USER
-        DB_PASS
-        DB_NAME
+    .ENV.EXAMPLE
+
+
+    
+
+
 
 ## 🧐 What's inside?
 
@@ -37,7 +38,6 @@ A quick look at the top-level files and directories you'll see in a Express JS p
     ├── package-lock.json
     ├── package.json
     └── README.md
-
 
 1.  _`/node_modules`_: This directory contains all of the modules of code that your project depends on (npm packages) are automatically installed.
 
